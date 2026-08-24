@@ -37,8 +37,8 @@
       <img src="./assets/logo-black.svg" alt="Alendis" style="height:36px; width:auto;">
     </a>
     <div style="display:flex; align-items:center; gap:clamp(16px,3vw,26px);">
-      <a href="#pricing" style="font:500 14px 'Inter'; color:#5A5A5A; transition:color .2s cubic-bezier(0.4,0,0.2,1);" style-hover="{ color:'#101010' }">Pricing</a>
-      <button onClick="{{ openSignIn }}" style="padding:10px 20px; background:#9A5735; color:#fff; border:none; border-radius:9999px; font:600 14px 'Inter'; cursor:pointer; transition:background .2s cubic-bezier(0.4,0,0.2,1);" style-hover="{ background:'#7E4529' }">Sign in</button>
+      <a href="#pricing" style="display:inline-flex; align-items:center; min-height:44px; padding:0 6px; font:500 14px 'Inter'; color:#5A5A5A; transition:color .2s cubic-bezier(0.4,0,0.2,1);" style-hover="{ color:'#101010' }">Pricing</a>
+      <button onClick="{{ openSignIn }}" style="min-height:44px; padding:9px 19px; background:transparent; color:#9A5735; border:1.5px solid rgba(154,87,53,.45); border-radius:9999px; font:600 14px 'Inter'; cursor:pointer; transition:background .2s cubic-bezier(0.4,0,0.2,1), border-color .2s cubic-bezier(0.4,0,0.2,1);" style-hover="{ background:'rgba(154,87,53,.07)', borderColor:'rgba(154,87,53,.75)' }">Sign in</button>
     </div>
   </nav>
 
@@ -67,21 +67,35 @@
         </div>
 
         <div style="display:flex; flex-direction:column; align-items:center; gap:8px; margin-top:16px;">
-          <a href="#" onClick="{{ openFreeLink }}" style="font:500 15px 'Inter'; color:#D4D4D4; text-decoration:underline; text-underline-offset:4px; text-decoration-thickness:1px; text-decoration-color:rgba(212,212,212,.4); transition:color .2s cubic-bezier(0.4,0,0.2,1);" style-hover="{ color:'#FCFCFC' }">Try one free analysis first</a>
-          <div style="font:500 13px 'Inter'; letter-spacing:.2px; color:#8D8D8D;">Pro from <span style="font-family:'Space Grotesk'; color:#A3A3A3;">€24.92</span> / month · <a href="#pricing" style="color:#8D8D8D; text-decoration:underline; text-underline-offset:3px;" style-hover="{ color:'#D4D4D4' }">see plans</a></div>
+          <a href="#" onClick="{{ openFreeLink }}" style="display:inline-flex; align-items:center; min-height:44px; padding:0 8px; font:500 15px 'Inter'; color:#D4D4D4; text-decoration:underline; text-underline-offset:4px; text-decoration-thickness:1px; text-decoration-color:rgba(212,212,212,.4); transition:color .2s cubic-bezier(0.4,0,0.2,1);" style-hover="{ color:'#FCFCFC' }">Try one free analysis</a>
         </div>
 
-        <!-- proof strip -->
-        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:clamp(18px,4vw,40px); margin-top:clamp(34px,5vw,46px); padding-top:24px; border-top:1px solid rgba(255,255,255,.1);">
-          <div><div style="font:700 26px 'Space Grotesk'; color:#FCFCFC; letter-spacing:-.5px;">1,100+</div><div style="font:500 13px 'Inter'; color:#8D8D8D; margin-top:3px;">Riders worldwide</div></div>
-          <div><div style="font:700 26px 'Space Grotesk'; color:#FCFCFC; letter-spacing:-.5px;">38</div><div style="font:500 13px 'Inter'; color:#8D8D8D; margin-top:3px;">Countries</div></div>
-          <div><div style="font:700 26px 'Space Grotesk'; color:#FCFCFC; letter-spacing:-.5px;">6 yrs</div><div style="font:500 13px 'Inter'; color:#8D8D8D; margin-top:3px;">Continuous data</div></div>
-          <div><div style="font:700 26px 'Space Grotesk'; color:#FCFCFC; letter-spacing:-.5px;">3D</div><div style="font:500 13px 'Inter'; color:#8D8D8D; margin-top:3px;">Biomechanics</div></div>
+        <!-- price bar -->
+        <div style="margin-top:clamp(30px,4.5vw,42px); padding-top:26px; border-top:1px solid rgba(255,255,255,.1);">
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); justify-items:center; align-items:start; gap:clamp(8px,3vw,64px); max-width:620px; margin:0 auto;">
+          <div style="text-align:center;">
+            <div style="font:700 clamp(23px,6vw,32px) 'Space Grotesk'; color:#FCFCFC; letter-spacing:-.8px; line-height:1;">€0</div>
+            <div style="font:500 clamp(12px,3.2vw,13px) 'Inter'; color:#A3A3A3; margin-top:6px;">Free to start</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font:700 clamp(23px,6vw,32px) 'Space Grotesk'; color:#FCFCFC; letter-spacing:-.8px; line-height:1;">€26.90</div>
+            <div style="font:500 clamp(12px,3.2vw,13px) 'Inter'; color:#A3A3A3; margin-top:6px;">per month</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font:700 clamp(23px,6vw,32px) 'Space Grotesk'; color:#FCFCFC; letter-spacing:-.8px; line-height:1;">€299</div>
+            <div style="font:500 clamp(12px,3.2vw,13px) 'Inter'; color:#A3A3A3; margin-top:6px;">per year</div>
+            <div style="font:500 clamp(11px,2.9vw,12px) 'Inter'; color:#8D8D8D; margin-top:2px; text-wrap:balance;">€24.92/mo · save €23.80</div>
+          </div>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:center; gap:9px; margin-top:22px;">
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:9999px; background:rgba(192,132,87,.14); border:1px solid rgba(192,132,87,.35); flex:none; color:#C08457;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+            <span style="font:500 13px 'Inter'; color:#A3A3A3;">No card required · Cancel anytime · <a href="#pricing" style="color:#C08457; text-decoration:underline; text-underline-offset:3px;" style-hover="{ color:'#D9A87C' }">see plans</a></span>
+          </div>
         </div>
 
         <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-top:22px;">
           <span style="display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:9999px; background:rgba(192,132,87,.14); border:1px solid rgba(192,132,87,.35); flex:none; color:#C08457;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-          <span style="font:500 13px 'Inter'; color:#A3A3A3; text-wrap:balance;">Built on six years of continuous competition footage from 38 countries</span>
+          <span style="font:500 13px 'Inter'; color:#A3A3A3; text-wrap:balance;">Built on six years of continuous competition footage</span>
         </div>
       </div>
     </div>
@@ -137,69 +151,22 @@
   <section id="moment" style="position: relative; z-index: 2; margin-top: -8vh; background: #0A0A0A; color: #FCFCFC; padding: clamp(54px,8.5vw,108px) clamp(18px,5vw,40px) clamp(64px,10vw,128px); padding-top: 28px">
     <div style="position:absolute; left:0; right:0; bottom:100%; height:42vh; background:linear-gradient(180deg, rgba(10,10,10,0) 0%, rgba(10,10,10,.55) 55%, #0A0A0A 100%); pointer-events:none;"></div>
     <div style="max-width:1120px; margin:0 auto;">
-      <div ref="{{ momentHeadRef }}" style="max-width:640px; margin:0 auto clamp(36px,5vw,56px); text-align:center; will-change:transform, opacity;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:clamp(32px,5vw,72px); align-items:start;">
+      <div ref="{{ momentHeadRef }}" style="will-change:transform, opacity;">
         <div style="font:600 12px 'Inter'; letter-spacing:1.6px; text-transform:uppercase; color:#C08457; margin-bottom:14px;">A single session</div>
-        <h2 style="margin:0; font-weight:700; font-size:clamp(30px,5vw,50px); line-height:1.08; letter-spacing:-1.2px; color:#FCFCFC; text-wrap:balance;">Here's what your horse looks like through Alendis.</h2>
-        <p style="margin:18px auto 0; font-size:clamp(15px,2vw,19px); line-height:1.6; color:#A3A3A3; max-width:600px;">Every stride, every gait transition, every subtle asymmetry — measured, tracked, and made visible.</p>
+        <h2 style="margin:0; font-weight:700; font-size:clamp(30px,4.4vw,50px); line-height:1.08; letter-spacing:-1.2px; color:#FCFCFC; text-wrap:balance;">Here's what your horse looks like through Alendis.</h2>
+        <p style="margin:18px 0 0; font-size:clamp(15px,2vw,19px); line-height:1.6; color:#A3A3A3; max-width:440px;">Every stride, every gait transition, every subtle asymmetry — measured, tracked, and made visible.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:clamp(24px,3vw,32px);">
+          <span style="padding:7px 14px; border:1px solid #2E2E2E; border-radius:9999px; font:500 12px 'Inter'; color:#A3A3A3;">15 strides</span>
+          <span style="padding:7px 14px; border:1px solid #2E2E2E; border-radius:9999px; font:500 12px 'Inter'; color:#A3A3A3;">Trot / canter</span>
+          <span style="padding:7px 14px; border:1px solid #2E2E2E; border-radius:9999px; font:500 12px 'Inter'; color:#A3A3A3;">One phone video</span>
+        </div>
       </div>
 
       <!-- APP ANALYSIS FRAME -->
-      <div style="perspective:1600px;">
-      <div ref="{{ momentFrameRef }}" style="background:#fff; border:1px solid #E0E2E5; border-radius:20px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,.16); transform-style:preserve-3d; transition:transform .12s linear; will-change:transform;">
-        <!-- top chrome bar -->
-        <div style="display:flex; align-items:center; gap:14px; padding:12px 18px; border-bottom:1px solid #EEEFF1;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
-          <div style="display:flex; align-items:center; gap:9px; min-width:0;"><span style="font:700 17px 'Inter'; color:#101010; letter-spacing:-.3px; white-space:nowrap;">Hall Practice</span><span style="width:8px; height:8px; border-radius:9999px; background:#22C55E; flex:none;"></span></div>
-          <div style="margin-left:auto; display:flex; align-items:center; gap:10px;">
-            <div style="display:flex; gap:6px;">
-              <span style="width:34px; height:34px; border-radius:9px; border:1px solid #E0E2E5; display:flex; align-items:center; justify-content:center; color:#525252;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"></path></svg></span>
-              <span style="width:34px; height:34px; border-radius:9px; border:1px solid #E0E2E5; display:flex; align-items:center; justify-content:center; color:#525252;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>
-              <span style="width:34px; height:34px; border-radius:9px; border:1px solid #E0E2E5; display:flex; align-items:center; justify-content:center; color:#525252;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 12 22l-9-9V3h10z"></path><circle cx="7.5" cy="7.5" r="1.2" fill="currentColor" stroke="none"></circle></svg></span>
-            </div>
-            <div style="display:inline-flex; align-items:center; gap:7px; padding:8px 15px; background:linear-gradient(135deg,#8B5CF6,#6D3DE0); border-radius:9999px; box-shadow:0 4px 14px rgba(139,92,246,.32);"><svg width="15" height="15" viewBox="0 0 24 24" fill="#fff"><path d="M12 2l2.4 5.9L20.5 9l-4.5 3.9L17.3 19 12 15.6 6.7 19l1.3-6.1L3.5 9l6.1-1.1z"></path></svg><span style="font:700 13px 'Inter'; color:#fff; white-space:nowrap;">ASK · Alendis AI</span></div>
-            <span style="width:34px; height:34px; border-radius:9999px; background:#EF4444; color:#fff; display:flex; align-items:center; justify-content:center; font:700 13px 'Inter'; flex:none;">S</span>
-          </div>
-        </div>
-
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:0;">
-          <!-- LEFT: video player -->
-          <div style="background:#0A0A0A; border-right:1px solid #EEEFF1; display:flex; flex-direction:column;">
-            <div style="position:relative; aspect-ratio:16/10; background:#000;">
-              <video src="./assets/session-clip.mp4" autoplay="" loop="" muted="" playsinline="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;"></video>
-              <div style="position:absolute; top:14px; left:14px; display:inline-flex; align-items:center; gap:7px; padding:6px 12px; background:rgba(34,197,94,.9); border-radius:9999px; font:600 12px 'Inter'; color:#fff;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Analysis coverage: 76%</div>
-              <!-- controls -->
-              <div style="position:absolute; left:0; right:0; bottom:0; padding:14px 16px 12px; background:linear-gradient(180deg, transparent, rgba(0,0,0,.75));">
-                <div style="display:flex; align-items:center; gap:12px;">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" style="flex:none;"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M11 5 6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg>
-                  <span style="font:500 12px 'Space Grotesk'; color:#fff; white-space:nowrap;">0:00 / 0:29</span>
-                  <div style="flex:1; height:4px; border-radius:9999px; background:rgba(255,255,255,.28); position:relative;"><div style="position:absolute; left:0; top:0; bottom:0; width:44%; background:#fff; border-radius:9999px;"></div><div style="position:absolute; left:44%; top:50%; width:11px; height:11px; border-radius:9999px; background:#fff; transform:translate(-50%,-50%);"></div></div>
-                  <span style="font:600 11px 'Inter'; color:#fff;">1x</span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"></path></svg>
-                </div>
-              </div>
-            </div>
-            <!-- scrubber -->
-            <div style="padding:12px 16px 16px;">
-              <div style="display:flex; justify-content:space-between; font:500 10px 'Space Grotesk'; color:#8D8D8D; margin-bottom:6px;"><span>0s</span><span>5s</span><span>10s</span><span>15s</span><span>20s</span><span>25s</span></div>
-              <div style="display:flex; gap:3px; height:44px;">
-                <div style="flex:1; border-radius:4px; overflow:hidden; background:#111;"><video data-thumb="" src="./assets/session-clip.mp4" muted="" playsinline="" preload="auto" style="width:100%; height:100%; object-fit:cover; display:block;"></video></div>
-                <div style="flex:1; border-radius:4px; overflow:hidden; background:#111; outline:2px solid #C08457; outline-offset:-1px;"><video data-thumb="" src="./assets/session-clip.mp4" muted="" playsinline="" preload="auto" style="width:100%; height:100%; object-fit:cover; display:block;"></video></div>
-                <div style="flex:1; border-radius:4px; overflow:hidden; background:#111;"><video data-thumb="" src="./assets/session-clip.mp4" muted="" playsinline="" preload="auto" style="width:100%; height:100%; object-fit:cover; display:block;"></video></div>
-                <div style="flex:1; border-radius:4px; overflow:hidden; background:#111;"><video data-thumb="" src="./assets/session-clip.mp4" muted="" playsinline="" preload="auto" style="width:100%; height:100%; object-fit:cover; display:block;"></video></div>
-                <div style="flex:1; border-radius:4px; overflow:hidden; background:#111;"><video data-thumb="" src="./assets/session-clip.mp4" muted="" playsinline="" preload="auto" style="width:100%; height:100%; object-fit:cover; display:block;"></video></div>
-                <div style="flex:1; border-radius:4px; overflow:hidden; background:#111;"><video data-thumb="" src="./assets/session-clip.mp4" muted="" playsinline="" preload="auto" style="width:100%; height:100%; object-fit:cover; display:block;"></video></div>
-                <div style="flex:1; border-radius:4px; overflow:hidden; background:#111;"><video data-thumb="" src="./assets/session-clip.mp4" muted="" playsinline="" preload="auto" style="width:100%; height:100%; object-fit:cover; display:block;"></video></div>
-              </div>
-              <div style="display:flex; align-items:center; gap:14px; margin-top:14px;">
-                <button style="display:inline-flex; align-items:center; gap:7px; padding:9px 16px; background:transparent; border:1.5px solid #3F3F3F; border-radius:9999px; font:600 12px 'Inter'; color:#FCFCFC; cursor:pointer; white-space:nowrap;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg>Create Segment</button>
-                <span style="font:400 12px 'Inter'; color:#8D8D8D; line-height:1.5;">Create a Segment of your activity for a more accurate Health &amp; Performance read.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- RIGHT: Rider view (unlocked) -->
-          <div style="max-height:460px; overflow-y:auto; padding:clamp(14px,2.4vw,20px);">
+      <div style="perspective:1600px; display:flex; width:100%;">
+      <div ref="{{ momentFrameRef }}" style="position:relative; flex:1; min-width:0; display:flex; flex-direction:column; height:clamp(380px,52vh,520px); background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,.16); -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 52%,rgba(0,0,0,.55) 76%,rgba(0,0,0,0) 100%); mask-image:linear-gradient(180deg,#000 0%,#000 52%,rgba(0,0,0,.55) 76%,rgba(0,0,0,0) 100%); transform-style:preserve-3d; transition:transform .12s linear; will-change:transform;">
+<div style="flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:none; padding:clamp(16px,2.4vw,22px);">
             <!-- tabs -->
             <div style="display:flex; gap:6px; margin-bottom:20px;">
               <span style="display:inline-flex; align-items:center; gap:7px; padding:9px 16px; background:#101010; border-radius:9999px; font:600 13px 'Inter'; color:#fff;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 3 0 1 0 18 0 9 3 0 1 0-18 0"></path><path d="M3 12c0 5 4 9 9 9"></path></svg>Rider view</span>
@@ -208,23 +175,23 @@
             </div>
 
             <!-- AI SUMMARY -->
-            <div style="position:relative; background:#F9F8FF; border:1px solid #E4DBFF; border-radius:14px; padding:18px 18px 16px 22px; overflow:hidden;">
-              <div style="position:absolute; left:0; top:0; bottom:0; width:3px; background:#8B5CF6;"></div>
-              <div style="display:flex; align-items:center; gap:7px; margin-bottom:10px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="1.8"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg><span style="font:700 11px 'Inter'; letter-spacing:.8px; text-transform:uppercase; color:#713CD3;">AI Summary</span></div>
+            <div style="position:relative; background:#FDF8F3; border:1px solid #EAD9C9; border-radius:14px; padding:18px 18px 16px 22px; overflow:hidden;">
+              <div style="position:absolute; left:0; top:0; bottom:0; width:3px; background:#9A5735;"></div>
+              <div style="display:flex; align-items:center; gap:7px; margin-bottom:10px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9A5735" stroke-width="1.8"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg><span style="font:700 11px 'Inter'; letter-spacing:.8px; text-transform:uppercase; color:#9A5735;">AI Summary</span></div>
               <div style="font:700 17px 'Inter'; color:#101010; letter-spacing:-.2px;">Here's what your horse is telling you</div>
               <p style="margin:8px 0 0; font:400 14px 'Inter'; color:#3F3F3F; line-height:1.6;">Your horse is moving well overall. The head could be more steady, and one leg could be bending more evenly. Record again in a few days and see if this changes.</p>
-              <div style="margin-top:14px; padding-top:12px; border-top:1px solid #E4DBFF; font:500 12px 'Inter'; color:#8D7BB0;">15 strides · Trot / canter · Moderate coverage</div>
+              <div style="margin-top:14px; padding-top:12px; border-top:1px solid #EAD9C9; font:500 12px 'Inter'; color:#9C7B62;">15 strides · Trot / canter · Moderate coverage</div>
             </div>
 
             <!-- Ask AI -->
-            <div style="display:flex; align-items:center; gap:12px; margin-top:14px; padding:14px 16px; border:1px dashed #C9BDF0; border-radius:14px;">
-              <span style="width:36px; height:36px; border-radius:9999px; background:#8B5CF6; display:flex; align-items:center; justify-content:center; flex:none;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></span>
-              <div><div style="font:600 14px 'Inter'; color:#101010;">Questions about this analysis?</div><div style="font:400 13px 'Inter'; color:#713CD3; margin-top:1px;">Ask Alendis AI why the head nod is asymmetric →</div></div>
+            <div style="display:flex; align-items:center; gap:12px; margin-top:14px; padding:14px 16px; border:1px dashed #E0C9B4; border-radius:14px;">
+              <span style="width:36px; height:36px; border-radius:9999px; background:#9A5735; display:flex; align-items:center; justify-content:center; flex:none;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></span>
+              <div><div style="font:600 14px 'Inter'; color:#101010;">Questions about this analysis?</div><div style="font:400 13px 'Inter'; color:#9A5735; margin-top:1px;">Ask Alendis AI why the head nod is asymmetric →</div></div>
             </div>
 
             <!-- Readiness Index -->
             <div style="margin-top:14px; border:1px solid #E0E2E5; border-radius:12px; padding:14px;">
-              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;"><span style="font:700 16px 'Inter'; color:#101010; letter-spacing:-.2px;">Readiness Index</span><a href="#moment" onClick="{{ stopLink }}" style="font:600 12px 'Inter'; color:#0A7BB2;">See full data →</a></div>
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;"><span style="font:700 16px 'Inter'; color:#101010; letter-spacing:-.2px;">Readiness Index</span><a href="#moment" onClick="{{ stopLink }}" style="font:600 12px 'Inter'; color:#9A5735;">See full data →</a></div>
               <div style="display:flex; align-items:center; gap:16px;">
                 <div style="position:relative; width:76px; height:76px; flex:none; display:flex; align-items:center; justify-content:center;">
                   <svg width="76" height="76" viewBox="0 0 76 76"><circle cx="38" cy="38" r="32" fill="none" stroke="#EDEEF0" stroke-width="6"></circle><circle cx="38" cy="38" r="32" fill="none" stroke="#22C55E" stroke-width="6" stroke-linecap="round" stroke-dasharray="201" stroke-dashoffset="10" transform="rotate(-90 38 38)"></circle></svg>
@@ -290,7 +257,7 @@
               </div>
             </div>
           </div>
-        </div>
+      </div>
       </div>
       </div>
     </div>
@@ -302,7 +269,7 @@
       <div data-reveal="" style="max-width:720px;">
         <div style="font:600 12px 'Inter'; letter-spacing:1.6px; text-transform:uppercase; color:#C08457; margin-bottom:14px;">Beyond the frame</div>
         <h2 style="margin:0; font-weight:700; font-size:clamp(30px,5vw,50px); line-height:1.08; letter-spacing:-1.2px; color:#FCFCFC; text-wrap:balance;">We reconstruct every stride in 3D.</h2>
-        <p style="margin:18px 0 0; font-size:clamp(15px,2vw,19px); line-height:1.6; color:#A3A3A3; max-width:600px;">Multi-camera fusion. True depth, not flat estimates. Every ordinary training video becomes structured movement data.</p>
+        <p style="margin:18px 0 0; font-size:clamp(15px,2vw,19px); line-height:1.6; color:#A3A3A3; max-width:600px;">Multi-angle fusion. True depth, not flat estimates. Works from a single clip — add angles for a fuller picture.</p>
       </div>
 
       <div data-reveal="" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:44px;">
@@ -316,7 +283,7 @@
           <div style="display:flex; flex-direction:column; gap:12px;">
             <div style="display:flex; gap:10px; font:400 14px 'Inter'; color:#A3A3A3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2" stroke-linecap="round" style="flex:none; margin-top:2px;"><path d="M18 6 6 18M6 6l12 12"></path></svg>One angle, one plane</div>
             <div style="display:flex; gap:10px; font:400 14px 'Inter'; color:#A3A3A3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2" stroke-linecap="round" style="flex:none; margin-top:2px;"><path d="M18 6 6 18M6 6l12 12"></path></svg>Depth is estimated, not measured</div>
-            <div style="display:flex; gap:10px; font:400 14px 'Inter'; color:#A3A3A3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2" stroke-linecap="round" style="flex:none; margin-top:2px;"><path d="M18 6 6 18M6 6l12 12"></path></svg>Limited to what one camera sees</div>
+            <div style="display:flex; gap:10px; font:400 14px 'Inter'; color:#A3A3A3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2" stroke-linecap="round" style="flex:none; margin-top:2px;"><path d="M18 6 6 18M6 6l12 12"></path></svg>Limited to what one flat view shows</div>
           </div>
         </div>
         <!-- alendis -->
@@ -324,12 +291,12 @@
           <div style="position:absolute; inset:0; background:radial-gradient(80% 60% at 80% 0%, rgba(192,132,87,.14), transparent 70%); pointer-events:none;"></div>
           <div style="position:relative;">
             <div style="font:600 11px 'Inter'; letter-spacing:1px; text-transform:uppercase; color:#C08457; margin-bottom:6px;">Alendis</div>
-            <div style="font:700 20px 'Inter'; color:#FCFCFC; letter-spacing:-.3px;">3D · multi-camera</div>
+            <div style="font:700 20px 'Inter'; color:#FCFCFC; letter-spacing:-.3px;">3D · multi-angle</div>
             <div style="font:400 13px 'Inter'; color:#8DB9Cf; margin-top:2px;">True 3D reconstruction</div>
             <div style="margin-top:18px; aspect-ratio:16/9; border-radius:12px; overflow:hidden; border:1px solid #14506b; background:#000;"><video ref="{{ multicamV }}" src="./assets/multicam-3d.mp4" autoplay="" loop="" muted="" playsinline="" style="width:100%; height:100%; object-fit:cover; display:block;"></video></div>
             <div style="height:1px; background:#14506b; margin:20px 0;"></div>
             <div style="display:flex; flex-direction:column; gap:12px;">
-              <div style="display:flex; gap:10px; font:400 14px 'Inter'; color:#E5E5E5;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C08457" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Real depth, triangulated across cameras</div>
+              <div style="display:flex; gap:10px; font:400 14px 'Inter'; color:#E5E5E5;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C08457" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Real depth, measured — not estimated</div>
               <div style="display:flex; gap:10px; font:400 14px 'Inter'; color:#E5E5E5;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C08457" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Anatomical keypoints, frame by frame</div>
               <div style="display:flex; gap:10px; font:400 14px 'Inter'; color:#E5E5E5;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C08457" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Thousands of measurements per stride</div>
             </div>
@@ -540,7 +507,7 @@
   <section style="display:none; background: #FFFFFF; padding: clamp(64px,10vw,128px) clamp(18px,5vw,40px); padding-top: 65px">
     <div style="max-width:1120px; margin:0 auto;">
       <div data-reveal="" style="text-align:center; max-width:680px; margin:0 auto;">
-        <div style="font:600 12px 'Inter'; letter-spacing:1.6px; text-transform:uppercase; color:#0A7BB2; margin-bottom:14px;">Built for you</div>
+        <div style="font:600 12px 'Inter'; letter-spacing:1.6px; text-transform:uppercase; color:#9A5735; margin-bottom:14px;">Built for you</div>
         <h2 style="margin:0; font-weight:700; font-size:clamp(30px,5vw,50px); line-height:1.08; letter-spacing:-1.2px; color:#101010; text-wrap:balance;">For every discipline.</h2>
         <p style="margin:16px auto 0; font:400 16px 'Inter'; color:#525252; line-height:1.6; max-width:520px;">Whether you race, ride dressage, jump, or breed — Alendis speaks your language.</p>
       </div>
@@ -573,7 +540,7 @@
   <section id="pricing" style="background: #FAF7F3; color: #101010; padding: clamp(64px,10vw,128px) clamp(18px,5vw,40px); padding-top: 64px">
     <div style="max-width:1120px; margin:0 auto;">
       <div data-reveal="" style="text-align:center; max-width:680px; margin:0 auto;">
-        <div style="font:600 12px 'Inter'; letter-spacing:1.6px; text-transform:uppercase; color:#0A7BB2; margin-bottom:14px;">Plans &amp; Pricing</div>
+        <div style="font:600 12px 'Inter'; letter-spacing:1.6px; text-transform:uppercase; color:#9A5735; margin-bottom:14px;">Plans &amp; Pricing</div>
         <h2 style="margin:0; font-weight:700; font-size:clamp(30px,5vw,50px); line-height:1.08; letter-spacing:-1.2px; color:#101010; text-wrap:balance;">Every ride, measured</h2>
         <p style="margin:16px 0 0; font:400 clamp(15px,1.7vw,17px) 'Inter'; line-height:1.55; color:#525252; text-wrap:pretty;">Pro gives you the full biomechanical picture — unlimited sessions, every horse in the stable, trends that flag a change before the eye catches it. A free tier exists if you want to read one video first.</p>
       </div>
@@ -589,7 +556,7 @@
             <div style="display:flex; gap:9px; font:400 14px 'Inter'; line-height:1.45; color:#101010;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9A5735" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Rider view analysis</div>
             <div style="display:flex; gap:9px; font:400 14px 'Inter'; line-height:1.45; color:#101010;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9A5735" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>AI chat — up to 5 messages a day</div>
           </div>
-          <button onClick="{{ openFree }}" style="margin-top:auto; width:100%; padding:13px; background:#fff; color:#101010; border:1.5px solid #BFBFBF; border-radius:9999px; font:600 14px 'Inter'; cursor:pointer; transition:border-color .2s ease;" style-hover="{ borderColor:'#101010' }">Start free</button>
+          <button onClick="{{ openFree }}" style="margin-top:auto; width:100%; min-height:46px; padding:13px; background:#fff; color:#101010; border:1.5px solid #BFBFBF; border-radius:9999px; font:600 14px 'Inter'; cursor:pointer; transition:border-color .2s ease;" style-hover="{ borderColor:'#101010' }">Start free</button>
           <div style="margin-top:10px; text-align:center; font:400 12px 'Inter'; color:#8D8D8D;">No credit card needed</div>
         </div>
         <!-- Pro Monthly -->
@@ -605,7 +572,7 @@
             <div style="display:flex; gap:9px; font:400 14px 'Inter'; line-height:1.45; color:#E5E5E5;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C08457" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>History and trends per horse</div>
             <div style="display:flex; gap:9px; font:400 14px 'Inter'; line-height:1.45; color:#E5E5E5;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C08457" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Downloadable reports &amp; unlimited AI chat</div>
           </div>
-          <button onClick="{{ openPro }}" style="margin-top:auto; width:100%; padding:13px; background:#9A5735; color:#fff; border:none; border-radius:9999px; font:600 14px 'Inter'; cursor:pointer; transition:background .2s ease;" style-hover="{ background:'#7E4529' }">Start monthly</button>
+          <button onClick="{{ openPro }}" style="margin-top:auto; width:100%; min-height:46px; padding:13px; background:#9A5735; color:#fff; border:none; border-radius:9999px; font:600 14px 'Inter'; cursor:pointer; transition:background .2s ease;" style-hover="{ background:'#7E4529' }">Start monthly</button>
           <div style="margin-top:10px; text-align:center; font:400 12px 'Inter'; color:#8D8D8D;">Billed monthly · cancel anytime</div>
         </div>
         <!-- Pro Yearly -->
@@ -620,7 +587,7 @@
             <div style="display:flex; gap:9px; font:400 14px 'Inter'; line-height:1.45; color:#101010;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9A5735" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Priority support</div>
             <div style="display:flex; gap:9px; font:400 14px 'Inter'; line-height:1.45; color:#101010;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9A5735" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Locked annual price</div>
           </div>
-          <button onClick="{{ openPro }}" style="margin-top:auto; width:100%; padding:13px; background:#9A5735; color:#fff; border:none; border-radius:9999px; font:600 14px 'Inter'; cursor:pointer; transition:background .2s ease;" style-hover="{ background:'#7E4529' }">Go yearly</button>
+          <button onClick="{{ openPro }}" style="margin-top:auto; width:100%; min-height:46px; padding:13px; background:#9A5735; color:#fff; border:none; border-radius:9999px; font:600 14px 'Inter'; cursor:pointer; transition:background .2s ease;" style-hover="{ background:'#7E4529' }">Go yearly</button>
           <div style="margin-top:10px; text-align:center; font:400 12px 'Inter'; color:#8D8D8D;">Cancel anytime</div>
         </div>
       </div>
@@ -634,7 +601,7 @@
       <h2 style="margin:0; font-weight:700; font-size:clamp(32px,6vw,60px); line-height:1.05; letter-spacing:-1.6px; color:#FCFCFC; text-wrap:balance;">Your horse is <em style="font-style:italic;">telling you</em> something.</h2>
       <p style="margin:20px auto 0; max-width:520px; font-size:clamp(16px,2.2vw,20px); line-height:1.55; color:#A3A3A3;">The data helps you hear it. Create your account and read your first video today.</p>
       <div style="margin-top:36px;"><button onClick="{{ openPro }}" style="display:inline-flex; align-items:center; gap:9px; padding:17px 34px; background:#9A5735; color:#fff; border:none; border-radius:9999px; font:600 17px 'Inter'; cursor:pointer; transition:background .2s ease, transform .2s ease; box-shadow:0 10px 40px rgba(154,87,53,.4);" style-hover="{ background:'#7E4529', transform:'translateY(-2px)' }">Get started <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button></div>
-      <div style="display:flex; justify-content:center; margin-top:16px;"><a href="#" onClick="{{ openFreeLink }}" style="font:500 15px 'Inter'; color:#D4D4D4; text-decoration:underline; text-underline-offset:4px; text-decoration-thickness:1px; text-decoration-color:rgba(212,212,212,.4); transition:color .2s cubic-bezier(0.4,0,0.2,1);" style-hover="{ color:'#FCFCFC' }">Try one free analysis first</a></div>
+      <div style="display:flex; justify-content:center; margin-top:16px;"><a href="#" onClick="{{ openFreeLink }}" style="display:inline-flex; align-items:center; min-height:44px; padding:0 8px; font:500 15px 'Inter'; color:#D4D4D4; text-decoration:underline; text-underline-offset:4px; text-decoration-thickness:1px; text-decoration-color:rgba(212,212,212,.4); transition:color .2s cubic-bezier(0.4,0,0.2,1);" style-hover="{ color:'#FCFCFC' }">Try one free analysis</a></div>
       <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:26px;">
         <span style="display:inline-flex; align-items:center; gap:7px; font:500 13px 'Inter'; color:#8D8D8D;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#27E36C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>No card required</span>
         <span style="color:#3F3F3F;">·</span>
@@ -652,9 +619,9 @@
       <span style="font:400 13px 'Inter'; color:#737373;">Built in Iceland · © 2026</span>
     </div>
     <div style="display:flex; gap:20px;">
-      <a href="#" style="font:400 12px 'Inter'; color:#5A5A5A;">Privacy</a>
-      <a href="#" style="font:400 12px 'Inter'; color:#5A5A5A;">Terms</a>
-      <a href="mailto:hello@alendis.is" style="font:400 12px 'Inter'; color:#5A5A5A;">Contact</a>
+      <a href="/privacy" style="display:inline-flex; align-items:center; min-height:44px; font:400 12px 'Inter'; color:#5A5A5A;">Privacy</a>
+      <a href="/terms" style="display:inline-flex; align-items:center; min-height:44px; font:400 12px 'Inter'; color:#5A5A5A;">Terms</a>
+      <a href="mailto:hello@alendis.is" style="display:inline-flex; align-items:center; min-height:44px; font:400 12px 'Inter'; color:#5A5A5A;">Contact</a>
     </div>
   </footer>
 
@@ -736,7 +703,7 @@
         <button onClick="{{ toDone }}" style="width:100%; margin-top:10px; display:flex; align-items:center; justify-content:center; gap:10px; padding:15px; background:#1F1F1F; color:#fff; border:1px solid #2E2E2E; border-radius:10px; font:600 15px 'Inter'; cursor:pointer; transition:background .2s cubic-bezier(0.4,0,0.2,1);" style-hover="{ background:'#262626' }"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" style="flex:0 0 auto;"><path d="M16.4 12.9c0-2 1.6-2.9 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7s-1.6-.7-2.6-.7c-1.3 0-2.6.8-3.2 2-1.4 2.4-.4 6 1 8 .7 1 1.4 2 2.4 2 1 0 1.3-.6 2.5-.6s1.5.6 2.5.6 1.6-.9 2.3-1.9c.7-1 1-2 1-2.1-.1 0-1.9-.8-1.9-2.8zM14.5 6.3c.5-.7.9-1.6.8-2.6-.8 0-1.8.6-2.4 1.2-.5.6-1 1.5-.8 2.4.9.1 1.8-.4 2.4-1z"></path></svg>Continue with Apple</button>
 
         <div style="text-align:center; margin-top:18px;"><a href="#" onClick="{{ toEmail }}" style="font:400 13px 'Inter'; color:#8D8D8D; text-decoration:underline; text-underline-offset:3px;">Use email instead</a></div>
-        <div style="text-align:center; font:400 11px 'Inter'; color:#525252; margin-top:14px;">By continuing you agree to our Terms &amp; Privacy.</div>
+        <div style="text-align:center; font:400 11px 'Inter'; color:#525252; margin-top:14px;">By continuing you agree to our <a href="/terms" target="_blank" style="color:#8D8D8D;">Terms</a> &amp; <a href="/privacy" target="_blank" style="color:#8D8D8D;">Privacy</a>.</div>
       </div>
       </sc-if>
 
@@ -792,9 +759,16 @@
       <div>
         <div style="display:flex; justify-content:center;"><img src="./assets/logo-black.svg" alt="Alendis" style="height:42px; width:auto;"></div>
         <div style="text-align:center; margin-top:24px; font:700 24px 'Inter'; color:#101010; letter-spacing:-.4px;">Welcome to Alendis</div>
-        <div style="text-align:center; margin-top:8px; font:400 15px 'Inter'; color:#525252;">Enter your email to continue</div>
+        <div style="text-align:center; margin-top:8px; font:400 15px 'Inter'; color:#525252;">Create your account — no card required</div>
+        <button onClick="{{ signupContinue }}" style="width:100%; margin-top:26px; display:flex; align-items:center; justify-content:center; gap:12px; padding:15px; background:#F7F7F6; color:#101010; border:1px solid #E0E2E5; border-radius:10px; font:600 15px 'Inter'; cursor:pointer; transition:background .2s cubic-bezier(0.4,0,0.2,1);" style-hover="{ background:'#EFEFEE' }"><svg width="19" height="19" viewBox="0 0 24 24" style="flex:0 0 auto;"><path fill="#4285F4" d="M23 12.3c0-.8-.1-1.5-.2-2.3H12v4.5h6.2c-.3 1.4-1.1 2.6-2.3 3.4v2.8h3.7c2.2-2 3.4-5 3.4-8.4z"></path><path fill="#34A853" d="M12 24c3.1 0 5.7-1 7.6-2.8l-3.7-2.8c-1 .7-2.3 1.1-3.9 1.1-3 0-5.5-2-6.4-4.7H1.8v2.9C3.7 21.3 7.5 24 12 24z"></path><path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.4-.4-2.1s.1-1.5.4-2.1V7.6H1.8C1.1 9 .7 10.5.7 12.1s.4 3.1 1.1 4.5l3.8-2.9z"></path><path fill="#EA4335" d="M12 4.9c1.7 0 3.2.6 4.4 1.7l3.3-3.3C17.7 1.4 15.1.4 12 .4 7.5.4 3.7 3 1.8 6.9l3.8 2.9C6.5 6.9 9 4.9 12 4.9z"></path></svg>Continue with Google</button>
 
-        <div style="margin-top:26px; font:600 14px 'Inter'; color:#101010;">Email</div>
+        <div style="display:flex; align-items:center; gap:14px; margin-top:24px;">
+          <span style="flex:1; height:1px; background:#E0E2E5;"></span>
+          <span style="font:500 13px 'Inter'; letter-spacing:.6px; color:#8D8D8D;">OR</span>
+          <span style="flex:1; height:1px; background:#E0E2E5;"></span>
+        </div>
+
+        <div style="margin-top:22px; font:600 14px 'Inter'; color:#101010;">Email</div>
         <div style="position:relative; margin-top:8px;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8D8D8D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; left:14px; top:50%; transform:translateY(-50%); pointer-events:none;"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg>
           <input value="{{ email }}" onInput="{{ setEmail }}" type="email" placeholder="Enter your email" style="width:100%; height:52px; padding:0 16px 0 44px; background:#FAF7F3; border:1px solid #E0E2E5; border-radius:10px; font:400 15px 'Inter'; color:#101010; outline:none; transition:border-color .2s cubic-bezier(0.4,0,0.2,1);" style-focus="{ borderColor:'#9A5735', background:'#fff' }">
@@ -813,18 +787,11 @@
         <div style="text-align:center; margin-top:20px; font:400 14px 'Inter'; color:#525252;">Prefer a sign-in link?</div>
         <div style="text-align:center; margin-top:4px;"><a href="#" onClick="{{ signupContinueLink }}" style="font:600 15px 'Inter'; color:#9A5735;">Use a sign-in link instead</a></div>
 
-        <div style="display:flex; align-items:center; gap:14px; margin-top:22px;">
-          <span style="flex:1; height:1px; background:#E0E2E5;"></span>
-          <span style="font:500 13px 'Inter'; letter-spacing:.6px; color:#8D8D8D;">OR</span>
-          <span style="flex:1; height:1px; background:#E0E2E5;"></span>
-        </div>
-
-        <button onClick="{{ signupContinue }}" style="width:100%; margin-top:20px; display:flex; align-items:center; justify-content:center; gap:12px; padding:15px; background:#F7F7F6; color:#101010; border:1px solid #E0E2E5; border-radius:10px; font:600 15px 'Inter'; cursor:pointer; transition:background .2s cubic-bezier(0.4,0,0.2,1);" style-hover="{ background:'#EFEFEE' }"><svg width="19" height="19" viewBox="0 0 24 24" style="flex:0 0 auto;"><path fill="#4285F4" d="M23 12.3c0-.8-.1-1.5-.2-2.3H12v4.5h6.2c-.3 1.4-1.1 2.6-2.3 3.4v2.8h3.7c2.2-2 3.4-5 3.4-8.4z"></path><path fill="#34A853" d="M12 24c3.1 0 5.7-1 7.6-2.8l-3.7-2.8c-1 .7-2.3 1.1-3.9 1.1-3 0-5.5-2-6.4-4.7H1.8v2.9C3.7 21.3 7.5 24 12 24z"></path><path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.4-.4-2.1s.1-1.5.4-2.1V7.6H1.8C1.1 9 .7 10.5.7 12.1s.4 3.1 1.1 4.5l3.8-2.9z"></path><path fill="#EA4335" d="M12 4.9c1.7 0 3.2.6 4.4 1.7l3.3-3.3C17.7 1.4 15.1.4 12 .4 7.5.4 3.7 3 1.8 6.9l3.8 2.9C6.5 6.9 9 4.9 12 4.9z"></path></svg>Continue with Google</button>
 
         <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-top:26px;">
-          <a href="#" onClick="{{ stopLink }}" style="font:400 13px 'Inter'; color:#525252;">Terms of Service</a>
+          <a href="/terms" target="_blank" style="font:400 13px 'Inter'; color:#525252;">Terms of Service</a>
           <span style="color:#BFBFBF;">|</span>
-          <a href="#" onClick="{{ stopLink }}" style="font:400 13px 'Inter'; color:#525252;">Privacy Policy</a>
+          <a href="/privacy" target="_blank" style="font:400 13px 'Inter'; color:#525252;">Privacy Policy</a>
         </div>
       </div>
       </sc-if>
@@ -878,7 +845,7 @@ class Component extends DCLogic {
     window.addEventListener('scroll', this.onScroll, { passive:true });
     this.onScroll();
 
-    document.querySelectorAll('[data-how-vid]').forEach(v=>{ const p = v.play(); if(p && p.catch) p.catch(()=>{}); });
+    document.querySelectorAll('[data-how-vid]').forEach(v=>{ v.muted = true; v.loop = true; v.playsInline = true; const p = v.play(); if(p && p.catch) p.catch(()=>{}); });
 
     document.querySelectorAll('[data-how-step]').forEach(s=>{
       s.style.transformOrigin = 'left center';
@@ -957,12 +924,14 @@ class Component extends DCLogic {
     };
     window.addEventListener('scroll', this.onMomentScroll, { passive:true });
     this.onMomentScroll();
-    { const v = this.uploadV.current; if(v){ const pr = v.play(); if(pr && pr.catch) pr.catch(()=>{}); } }
+    { const v = this.uploadV.current; if(v){ v.muted = true; v.loop = true; v.playsInline = true; const pr = v.play(); if(pr && pr.catch) pr.catch(()=>{}); } }
     { const v = this.multicamV.current; if(v){ v.muted = true; v.loop = true; v.playsInline = true; const pr = v.play(); if(pr && pr.catch) pr.catch(()=>{}); } }
 
     const a = this.heroV1.current, b = this.heroV2.current;
     if(a && b){
+      [a,b].forEach(v=>{ v.muted = true; v.defaultMuted = true; v.playsInline = true; v.setAttribute('muted',''); });
       a.loop = false; b.loop = false;
+      { const pr = a.play(); if(pr && pr.catch) pr.catch(()=>{}); }
       a.addEventListener('ended', ()=>{
         a.style.opacity = '0'; b.style.opacity = '1';
         b.currentTime = 0; b.play();
@@ -972,6 +941,17 @@ class Component extends DCLogic {
         a.currentTime = 0; a.play();
       });
     }
+
+    // production safety net: some mobile browsers still refuse the first autoplay
+    // (low-power mode, data saver). Retry every paused video on first interaction.
+    const kick = () => {
+      document.querySelectorAll('video').forEach(v=>{
+        if(v.paused && v.dataset.howVid !== undefined || v.paused && v !== this.heroV2.current){
+          v.muted = true; const pr = v.play(); if(pr && pr.catch) pr.catch(()=>{});
+        }
+      });
+    };
+    ['touchstart','pointerdown','scroll'].forEach(ev=>window.addEventListener(ev, kick, { once:true, passive:true }));
 
     const thumbs = Array.from(document.querySelectorAll('[data-thumb]'));
     thumbs.forEach((v, i)=>{

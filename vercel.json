@@ -1,5 +1,10 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/signup", "destination": "/", "permanent": false },
+    { "source": "/plans", "destination": "/#pricing", "permanent": false },
+    { "source": "/pricing", "destination": "/#pricing", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
