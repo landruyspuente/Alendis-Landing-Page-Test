@@ -52,7 +52,7 @@
 
   <!-- ===================== STICKY NAV ===================== -->
   <nav ref="{{ navRef }}" aria-label="Main" style="position:fixed; top:0; left:0; right:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:16px clamp(18px,5vw,40px); background:rgba(10,10,10,.92); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid transparent; transition:transform .2s cubic-bezier(0.4,0,0.2,1), border-color .2s cubic-bezier(0.4,0,0.2,1);">
-    <a href="#top" style="display:flex; align-items:center; gap:10px;">
+    <a href="#top" style="display:flex; align-items:center; gap:10px; min-height:44px;">
       <img src="./assets/logo-white.png" alt="Alendis" style="height:36px; width:auto;">
     </a>
     <div style="display:flex; align-items:center; gap:clamp(16px,3vw,26px);">
@@ -70,31 +70,95 @@
   <main id="main" style="scroll-margin-top:92px;">
 
   <!-- ===================== HERO ===================== -->
-  <header id="top" style="scroll-margin-top:0; position:relative; min-height:100svh; display:flex; align-items:center; justify-content:center; overflow:hidden; padding:calc(77px + clamp(24px,3.5vw,40px)) clamp(18px,5vw,40px) clamp(40px,7vw,72px);">
-    <!-- video / photo background -->
-    <div style="position:absolute; inset:0; z-index:0;">
-      <video ref="{{ heroV1 }}" src="./assets/hero-loop.mp4" autoplay="" muted="" playsinline="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; opacity:1; transition:opacity 1.4s ease;"></video>
-      <video ref="{{ heroV2 }}" src="./assets/hero-loop-2.mp4" preload="none" muted="" playsinline="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity 1.4s ease;"></video>
-    </div>
-    <div style="position:absolute; inset:0; z-index:0; background:rgba(10,10,10,.45); pointer-events:none;"></div>
-    <!-- gradient scrims -->
-    <div style="position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(180deg, rgba(10,10,10,.72) 0%, rgba(10,10,10,.28) 34%, rgba(10,10,10,.5) 66%, rgba(10,10,10,.9) 88%, rgba(10,10,10,1) 100%);"></div>
-    <div style="position:absolute; inset:0; z-index:1; pointer-events:none; background:radial-gradient(90% 70% at 50% 55%, rgba(10,10,10,.5), transparent 65%);"></div>
-    <div style="position:absolute; inset:0; z-index:2; pointer-events:none; background:radial-gradient(70% 55% at 50% 62%, rgba(192,132,87,.16), transparent 70%);"></div>
-    <!-- hero content -->
-    <div ref="{{ heroContentRef }}" style="position:relative; z-index:5; width:100%; max-width:1120px; margin:0 auto; will-change:transform, opacity;">
-      <div style="max-width:820px; margin:0 auto; text-align:center;">
-        <h1 style="margin:0; font-weight:700; font-size:clamp(44px,8.4vw,90px); line-height:1.02; letter-spacing:-.022em; color:#FCFCFC; text-wrap:balance;">What is your <em style="font-style:italic; font-weight:700;">horse</em> telling you?</h1>
-        <p style="margin:22px auto 0; font-weight:400; font-size:clamp(17px,2.2vw,23px); line-height:1.5; color:#E5E5E5; max-width:620px; text-wrap:pretty;">Your horse can't tell you how they feel. But they show you — in every stride. Alendis reads it.</p>
+  <!-- HERO — restructured 2026-09-01 to Anna's two-column brief (ref: Zoom 404 structure,
+       not its styling). Text and media each get their own ground; nothing sits on the photo,
+       so the image no longer has to be scrimmed to black to carry type. Stays dark: a white
+       hero on a dark page reads as a bug.
+       2026-09-01 (2nd pass): the media now fills the whole header instead of ending at a hard
+       vertical seam mid-page. The text column keeps its own ground, but as a translucent panel
+       whose right edge dissolves across ~40% of the width — the transition, not a cut.
+       Breakpoint is done with auto-fit/minmax (no media queries available inline): one column
+       under ~940px, two above. -->
+  <header id="top" style="scroll-margin-top:0; position:relative; min-height:100svh; background:#0A0A0A; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,470px),1fr)); grid-template-rows:minmax(min-content,1fr); grid-auto-rows:minmax(min-content,auto); align-items:stretch; overflow:hidden;">
 
-        <div style="display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:clamp(30px,4.5vw,40px);">
-          <button onClick="{{ openFree }}" style="display:inline-flex; align-items:center; justify-content:center; gap:11px; width:100%; max-width:420px; min-height:56px; padding:16px 30px; background:#9E4B25; color:#fff; border:none; border-radius:9999px; font:600 clamp(15px,1.8vw,17px) 'Inter',-apple-system,sans-serif; letter-spacing:-.2px; cursor:pointer; transition:background .2s cubic-bezier(0.4,0,0.2,1), transform .2s cubic-bezier(0.4,0,0.2,1); box-shadow:0 6px 20px rgba(154,87,53,.28);" style-hover="{ background:'#7E4529', transform:'translateY(-2px)' }">Analyze a video — free
+    <!-- MEDIA — full-bleed behind the whole header.
+         ⚠ PLACEHOLDER FOOTAGE. Anna's brief: a whole horse in motion, side-on, daylight, with
+         the AI keypoint lines drawn on it. These are the existing hero loops, kept until the
+         trot clip lands. The keypoint overlay is deliberately NOT drawn here — the geometry has
+         to come from Preet (compare.html / the 27 Aug photoreal render), not be invented.
+         Swap the two src values and the section is done. -->
+    <div style="position:absolute; inset:0; z-index:0;">
+      <!-- ONE clip, not three. 2026-09-02: the ring ran hero-horse-2 → hero-loop → hero-horse-1,
+           and measured in the two-column layout at 1440 only the first one keeps the horse in the
+           band the text panel does not cover. hero-loop puts it behind the panel and shows fencing
+           and trees on the right; hero-horse-1 shows hindquarters cropped against the edge plus a
+           lunge line. Two thirds of a 39s cycle reproduced Anna's objection #4 — "and there is no
+           horse" — so the two failing clips are out until Jaivin's footage lands.
+           Per-clip object-position cannot rescue them: the cover crop changes with container
+           aspect, so a value that frames the horse at one width loses it at another.
+           Neither is fixable from source anyway — hero-loop has a human back filling the
+           foreground and hero-horse-1 a handler with a taut line, which fail "one horse, clean
+           background, no other people in frame" and the welfare rule at every timestamp.
+           To restore the ring: add the clips back as heroV2/heroV3 (the refs, the handoff, the
+           visibility gate and the loop exemption all read from heroVids(), so nothing else
+           changes) and drop the loop attribute below. -->
+      <video ref="{{ heroV1 }}" src="./assets/hero-horse-2.mp4" poster="./assets/poster-hero-2.jpg" autoplay="" loop="" muted="" playsinline="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; object-position:0% 50%; opacity:1; transition:opacity 1.4s ease;"></video>
+    </div>
+    <!-- The text panel, as a gradient rather than a block: opaque under the words, gone by 88%. -->
+    <div style="position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(90deg, rgba(10,10,10,.94) 0%, rgba(10,10,10,.92) 30%, rgba(10,10,10,.86) 44%, rgba(10,10,10,.5) 58%, rgba(10,10,10,.18) 72%, rgba(10,10,10,0) 86%);"></div>
+    <!-- Vertical pass: carries the one-column layout, where the words sit over the image.
+         The middle stops were raised 2026-09-01 after measuring at 390px: the horizontal
+         gradient's stops are percentages of the header, so on a phone the ends of the text
+         lines land at ~5% alpha over a daylight clip. Still a long way from the scrimmed-to-
+         black hero Anna rejected — and on desktop it falls on the half the horizontal pass
+         has already taken to ~.9, so it costs the image almost nothing there. -->
+    <div style="position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(180deg, rgba(10,10,10,.58) 0%, rgba(10,10,10,.26) 38%, rgba(10,10,10,.2) 62%, rgba(10,10,10,.74) 90%, #0A0A0A 100%);"></div>
+
+    <!-- LEFT: text on its own surface -->
+    <div ref="{{ heroContentRef }}" style="position:relative; z-index:5; display:flex; flex-direction:column; justify-content:center; padding:calc(77px + clamp(28px,4.5vw,56px)) clamp(20px,2.2vw,32px) clamp(44px,6vw,76px) max(clamp(22px,5vw,40px), calc((100vw - 1280px) / 2)); will-change:transform, opacity;">
+      <!-- Headline to two lines. Three constraints had to move together: the wrapper cap
+           (560 → 660), the column's right padding, and the size. At 1440 the grid gives this
+           column 720px and the paddings ate it down to 576 — under the 621px the widest line
+           needs at 76px, so the cap alone changed nothing. 70px puts the widest line at ~572
+           inside ~600 of usable width.
+           2026-09-02: raised to 78px (deliberate — a bigger headline). Kept as a clamp so it
+           still scales down; the fixed 646x158 box that came with the size is gone, since it
+           stopped tracking both the column and its own text.
+           ⚠ The binding constraint is NOT this max-width — it is the grid column, which is
+           viewport/2 minus both paddings (608px at a 1440 viewport, where padding-left is the
+           1280-centering branch). The widest line, "horse telling you?", measures 600px at
+           78px, so it clears by 8px. Since the column does not grow with vw the way the font
+           does, the coefficient is what breaks it: 5.8vw put every width from 940 to 1240 into
+           three lines with a "you?" orphan. 5.5vw still reaches the 78px ceiling at ~1418px.
+           Rule of thumb before changing either number: font-size must stay under avail x 0.13.
+           Do not trim padding to chase this — the cap is not the limit. -->
+      <div style="max-width:700px;">
+        <h1 style="margin:0; font-weight:700; font-size:clamp(40px,5.5vw,78px); line-height:1.03; letter-spacing:-.026em; color:#FCFCFC; text-wrap:balance;">What is your <em style="font-style:italic; font-weight:700;">horse</em> telling you?</h1>
+        <p style="margin:22px 0 0; font-weight:400; font-size:clamp(17px,1.9vw,21px); line-height:1.55; color:#E5E5E5; max-width:480px; text-wrap:pretty;">Your horse can't tell you how they feel. But they show you — in every stride. Alendis reads it.</p>
+
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:16px; margin-top:clamp(30px,4.5vw,40px);">
+          <button onClick="{{ openFree }}" style="display:inline-flex; align-items:center; justify-content:center; gap:11px; width:auto; min-height:56px; padding:16px 30px; background:#9E4B25; color:#fff; border:none; border-radius:9999px; font:600 clamp(15px,1.8vw,17px) 'Inter',-apple-system,sans-serif; letter-spacing:-.2px; cursor:pointer; transition:background .2s cubic-bezier(0.4,0,0.2,1), transform .2s cubic-bezier(0.4,0,0.2,1); box-shadow:0 6px 20px rgba(154,87,53,.28);" style-hover="{ background:'#7E4529', transform:'translateY(-2px)' }">Analyze a video — free
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
           </button>
-          <span style="font:500 13px 'Inter',-apple-system,sans-serif; color:#E5E5E5; letter-spacing:.2px;">No account needed to start</span>
+          <!-- Two lines, and deliberately not the two that were here before. Those said the
+               same thing twice at different sizes and greys, which is what read as clutter.
+               These carry different facts: the first is what it costs to start, the second is
+               what it costs after. Anna's correction of 2026-09-02 — the first hero document
+               always said one line of price, not a table; the plan cards grew into the table
+               that was competing with the CTA, so the table goes and the number stays here.
+               Monthly only: one number sticks, two invite a comparison, and yearly is a choice
+               people make after they have decided to buy. -->
+          <div style="display:flex; flex-direction:column; gap:5px; max-width:420px;">
+            <p style="margin:0; font:400 14px 'Inter',-apple-system,sans-serif; color:#C4C4C4; line-height:1.55; text-wrap:pretty;">No account, no card. Two free analyses.</p>
+            <p style="margin:0; font:400 14px 'Inter',-apple-system,sans-serif; color:#A3A3A3; line-height:1.55; text-wrap:pretty;">After that <strong style="font-weight:600; color:#E5E5E5; font-variant-numeric:tabular-nums;">€26.90 a month</strong>. Cancel any time.</p>
+          </div>
         </div>
 
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(7px,1.1vw,11px); max-width:470px; margin:clamp(24px,3.4vw,32px) auto 0;">
+        <!-- Plan cards — hidden 2026-09-01 at Anna's request. They don't belong in a two-column
+             hero, and as the second brightest thing after the button they put "what does it cost"
+             before "what is this". Pricing carries the same information in more detail, so this is
+             a suppression, not a move. Hidden, not deleted. -->
+        <div style="display:none; grid-template-columns:repeat(3,1fr); gap:clamp(7px,1.1vw,11px); max-width:470px; margin:clamp(24px,3.4vw,32px) auto 0;">
           <a href="#pricing" style="display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:5px; padding:12px 12px 15px; border-radius:12px; text-decoration:none; cursor:pointer; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.14); transition:border-color .2s cubic-bezier(0.4,0,0.2,1), transform .2s cubic-bezier(0.4,0,0.2,1);" style-hover="{ borderColor:'rgba(192,132,87,.9)', transform:'translateY(-2px)' }">
             <span style="height:12px; font:600 9px 'Inter',-apple-system,sans-serif; letter-spacing:1px; text-transform:uppercase; color:transparent; line-height:12px;" aria-hidden="true">·</span>
             <span style="font:600 clamp(12px,1.5vw,13px) 'Inter',-apple-system,sans-serif; color:#A3A3A3; letter-spacing:-.1px; line-height:1.15; text-align:center;">Freemium</span>
@@ -115,9 +179,14 @@
           </a>
         </div>
 
-        <p style="margin:18px auto 0; max-width:460px; font:400 14px 'Inter',sans-serif; color:#A3A3A3; line-height:1.5; text-wrap:balance;">Two free analyses, under a minute each. Any phone works.</p>
+
       </div>
     </div>
+
+    <!-- RIGHT: no element of its own — the media is behind everything now. This cell only
+         reserves the second column so the text never runs past the halfway point, and in the
+         one-column layout it becomes a band of untouched image below the words. -->
+    <div style="position:relative; z-index:1; min-height:clamp(220px,38vh,420px); pointer-events:none;"></div>
   </header>
 
   <!-- ===================== CAPTURE → ANALYZE (3D parallax phone) ===================== -->
@@ -149,7 +218,7 @@
           <div ref="{{ phoneTiltRef }}" style="position:relative; width:clamp(240px,74vw,290px); aspect-ratio:9/19.2; border-radius:44px; background:#050505; border:1px solid #2A2A2A; box-shadow:0 40px 90px rgba(0,0,0,.6), 0 0 0 8px #0E0E0E, inset 0 0 0 2px #1A1A1A; transform-style:preserve-3d; transition:transform .12s linear; will-change:transform;">
             <!-- screen -->
             <div style="position:absolute; inset:9px; border-radius:36px; overflow:hidden; background:#000;">
-              <video ref="{{ uploadV }}" src="./assets/upload-flow.mp4" loop="" muted="" muted="" playsinline="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;"></video>
+              <video ref="{{ uploadV }}" src="./assets/upload-flow.mp4" poster="./assets/poster-upload-flow.jpg" loop="" muted="" playsinline="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;"></video>
               <!-- notch -->
               <div style="position:absolute; top:10px; left:50%; transform:translateX(-50%); width:88px; height:24px; background:#000; border-radius:9999px; z-index:3;"></div>
             </div>
@@ -178,8 +247,8 @@
 
       <!-- IMAGE LEADS, ONE CARD SITS WITH IT -->
       <div ref="{{ momentFrameRef }}" style="position:relative; flex:2.3 1 420px; min-width:0; transition:transform .12s linear; will-change:transform;">
-        <div style="position:relative; width:100%; aspect-ratio:154/97.2; border-radius:20px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,.4);">
-          <img ref="{{ momentImgRef }}" src="./assets/yard-phone-4.png" alt="A rider in a paddock holding up a phone showing an Alendis result, loose horse grazing behind" style="position:absolute; display:block; width:152%; height:auto; left:-39.4%; top:-19%; will-change:transform;">
+        <div style="position:relative; width:100%; aspect-ratio:16/9; border-radius:20px; overflow:hidden; background:#0A0A0A; box-shadow:0 30px 80px rgba(0,0,0,.4);">
+          <img ref="{{ momentImgRef }}" src="./assets/yard-phone-5.jpg" alt="A hand holding a phone in a paddock, the Alendis result on screen with keypoint lines tracked over the horse, a loose horse standing behind" style="position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover; will-change:transform;">
         </div>
         <!-- Outer AI Summary card — hidden 2026-09-01. It repeated the phone's own card word for word
              (same eyebrow, same headline, same first sentence, meta differing only in its tail) and its
@@ -206,30 +275,28 @@
       <div data-reveal="" style="flex:1 1 320px; min-width:0;">
         <div style="font:600 12px 'Inter',sans-serif; letter-spacing:1.6px; text-transform:uppercase; color:#9A5735; margin-bottom:14px;">Beyond the frame</div>
         <h2 style="margin:0; font-weight:700; font-size:clamp(30px,5vw,50px); line-height:1.08; letter-spacing:-.024em; color:#101010; text-wrap:balance;">The same numbers, session after session.</h2>
-        <p style="margin:20px 0 0; font-size:clamp(16px,2vw,19px); line-height:1.6; color:#525252; text-wrap:pretty;">Filmed from a different spot this week? A flat system gives you a different number — not because your horse changed, but because you stood somewhere else. We reconstruct the stride in 3D, so what you're comparing is the horse.</p>
+        <p style="margin:20px 0 0; font-size:clamp(16px,2vw,19px); line-height:1.6; color:#525252; text-wrap:pretty;">Filmed from a different spot this week? A flat system gives you a different number — not because your horse changed, but because you stood somewhere else. The stride is reconstructed in 3D, so what you're comparing is the horse.</p>
         <p style="margin:18px 0 0; font:500 clamp(16px,2vw,19px) 'Inter',sans-serif; line-height:1.5; color:#101010;">One clip is enough. <span style="color:#9A5735;">More angles sharpen it.</span></p>
       </div>
 
-      <div ref="{{ frame3Ref }}" style="position:relative; flex:1 1 380px; min-width:0; border-radius:20px; overflow:hidden; background:#000; box-shadow:0 24px 56px rgba(16,16,16,.22); will-change:transform, opacity;">
-        <video ref="{{ multicamV }}" src="./assets/multicam-3d.mp4" loop="" muted="" preload="metadata" playsinline="" style="display:block; width:100%; aspect-ratio:16/9.9; object-fit:cover;"></video>
-        <div style="position:absolute; left:0; right:0; bottom:0; padding:52px clamp(16px,2.2vw,24px) clamp(16px,2vw,20px); background:linear-gradient(to top, rgba(0,0,0,.88), rgba(0,0,0,0));">
-          <div style="display:flex; flex-wrap:wrap; align-items:center; gap:9px clamp(12px,1.8vw,18px);">
-            <div style="display:flex; align-items:baseline; gap:7px; white-space:nowrap;">
-              <span style="font:700 clamp(22px,2.4vw,28px) 'Inter',-apple-system,sans-serif; color:#FCFCFC; letter-spacing:-0.02em; line-height:1; font-variant-numeric:tabular-nums;">41<span style="font:500 12px 'Inter',sans-serif; letter-spacing:0; color:rgba(255,255,255,.6);">mm</span></span>
-              <span style="font:500 12px 'Inter',sans-serif; color:rgba(255,255,255,.7);">rail</span>
-            </div>
-            <span style="font:400 22px 'Inter',-apple-system,sans-serif; color:#C08457; line-height:1; flex:none; font-variant-numeric:tabular-nums;">=</span>
-            <div style="display:flex; align-items:baseline; gap:7px; white-space:nowrap;">
-              <span style="font:700 clamp(22px,2.4vw,28px) 'Inter',-apple-system,sans-serif; color:#FCFCFC; letter-spacing:-0.02em; line-height:1; font-variant-numeric:tabular-nums;">41<span style="font:500 12px 'Inter',sans-serif; letter-spacing:0; color:rgba(255,255,255,.6);">mm</span></span>
-              <span style="font:500 12px 'Inter',sans-serif; color:rgba(255,255,255,.7);">gate, a week later</span>
-            </div>
-          </div>
-          <div style="margin-top:9px; font:500 12.5px 'Inter',sans-serif; color:rgba(255,255,255,.74);">Same hip rise, two camera positions.</div>
-        </div>
-        <div style="position:absolute; top:clamp(14px,2vw,22px); left:clamp(14px,2vw,22px); display:inline-flex; align-items:center; gap:8px; padding:7px 13px; background:rgba(10,10,10,.66); border:1px solid rgba(255,255,255,.16); border-radius:9999px;">
-          <span style="width:7px; height:7px; border-radius:9999px; background:#C08457; flex:none;"></span>
-          <span style="font:600 11px 'Inter',sans-serif; letter-spacing:1px; text-transform:uppercase; color:#FCFCFC;">15 strides, reconstructed in 3D</span>
-        </div>
+      <!-- 2026-09-02: multicam-3d.mp4 replaced by the delivered clip, then replaced again by
+           its second cut. That second cut clears both objections logged against the first:
+           no burned-in "Horse 0.97" debug boxes, and the keypoints are the app's warm tone
+           rather than clinical green — so this surface and the phone screen in #moment now
+           read as the same product. Its own background is the same cream as this section
+           (#FAF7F3), which changes the container: the black fill, the drop shadow and the
+           bottom scrim all existed to hold white type over dark footage and now have nothing
+           to sit on. Removed rather than restyled.
+           The two overlays that were burned over the video — the 41mm proof and the
+           "15 strides" badge — are GONE, not restyled and not merely moved. They described
+           multicam-3d.mp4: this clip shows no 41mm readout, no same-horse-from-two-positions
+           comparison and no stride count, so keeping them asserted a measured equivalence the
+           viewer cannot see. The 41mm proof returns when footage that actually depicts it
+           lands. The caption now states only what is on screen.
+           Ratio is a true 16:9 (1920x1080); the old 16/9.9 was cropping it. -->
+      <div ref="{{ frame3Ref }}" style="position:relative; flex:1 1 380px; min-width:0; will-change:transform, opacity;">
+        <video ref="{{ multicamV }}" src="./assets/beyond-the-frame.mp4" poster="./assets/poster-beyond-frame.jpg" loop="" muted="" preload="metadata" playsinline="" style="display:block; width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:16px; background:#FAF7F3;"></video>
+        <div style="margin-top: clamp(14px,1.8vw,18px); font: 500 13px 'Inter',sans-serif; color: #525252; line-height: 1.55; text-wrap: pretty; text-align: center; font-size: 14px">Keypoints tracked through each clip, resolved into one 3D reconstruction.</div>
       </div>
       </div>
 
@@ -277,9 +344,9 @@
     <div style="position:sticky; top:0; height:100vh; overflow:hidden; display:flex; align-items:center;">
       <!-- background videos -->
       <div style="position:absolute; inset:0; z-index:0;">
-        <video data-how-vid="0" src="./assets/how-1.mp4" autoplay="" loop="" muted="" playsinline="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:1; transition:opacity .5s ease;"></video>
-        <video data-how-vid="1" src="./assets/how-2.mp4" loop="" preload="metadata" muted="" playsinline="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .5s ease;"></video>
-        <video data-how-vid="2" src="./assets/how-3.mp4" loop="" preload="metadata" muted="" playsinline="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .5s ease;"></video>
+        <video data-how-vid="0" src="./assets/how-1.mp4" poster="./assets/poster-how-1.jpg" autoplay="" loop="" muted="" playsinline="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:1; transition:opacity .5s ease;"></video>
+        <video data-how-vid="1" src="./assets/how-2.mp4" poster="./assets/poster-how-2.jpg" loop="" preload="metadata" muted="" playsinline="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .5s ease;"></video>
+        <video data-how-vid="2" src="./assets/how-3.mp4" poster="./assets/poster-how-3.jpg" loop="" preload="metadata" muted="" playsinline="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .5s ease;"></video>
       </div>
       <div style="position:absolute; inset:0; z-index:1; background:rgba(6,6,6,.72); pointer-events:none;"></div>
       <div style="position:absolute; inset:0; z-index:1; background:linear-gradient(90deg, rgba(6,6,6,.72) 0%, rgba(6,6,6,.2) 55%, transparent 100%); pointer-events:none;"></div>
@@ -293,15 +360,15 @@
           <div data-how-step="0" style="display:flex; gap:22px; opacity:1; transition:opacity .45s ease;">
             <div data-how-num="0" style="font:700 clamp(40px,6vw,66px)/1 'Inter',-apple-system,sans-serif; letter-spacing:-0.02em; color:#C08457; flex:none; transition:color .45s ease; font-variant-numeric:tabular-nums;">01</div>
             <div>
-              <div style="font:600 clamp(24px,3.1vw,31px) 'Inter',sans-serif; color:#FCFCFC; letter-spacing:-.3px;">Film your horse</div>
-              <p style="margin:10px 0 0; font:400 clamp(18px,1.55vw,21px) 'Inter',sans-serif; color:#C4C4C4; line-height:1.6;">Use your phone. Walk, trot, canter, jump — any gait, any discipline. Side, front, or hind angle.</p>
+              <div style="font:600 clamp(24px,3.1vw,31px) 'Inter',sans-serif; color:#FCFCFC; letter-spacing:-.3px;">Use a clip you already have</div>
+              <p style="margin:10px 0 0; font:400 clamp(18px,1.55vw,21px) 'Inter',sans-serif; color:#C4C4C4; line-height:1.6;">Or film a new one — any phone. Walk, trot, canter, jump, any discipline. Side, front or hind angle.</p>
             </div>
           </div>
           <div data-how-step="1" style="display:flex; gap:22px; opacity:.28; transition:opacity .45s ease;">
             <div data-how-num="1" style="font:700 clamp(40px,6vw,66px)/1 'Inter',-apple-system,sans-serif; letter-spacing:-0.02em; color:transparent; -webkit-text-stroke:2px #8D8D8D; flex:none; transition:color .45s ease; font-variant-numeric:tabular-nums;">02</div>
             <div>
               <div style="font:600 clamp(24px,3.1vw,31px) 'Inter',sans-serif; color:#FCFCFC; letter-spacing:-.3px;">Get AI analysis</div>
-              <p style="margin:10px 0 0; font:400 clamp(18px,1.55vw,21px) 'Inter',sans-serif; color:#C4C4C4; line-height:1.6;">Stride, asymmetry, and range of motion in under a minute. No sensors. No lab. No specialist required.</p>
+              <p style="margin:10px 0 0; font:400 clamp(18px,1.55vw,21px) 'Inter',sans-serif; color:#C4C4C4; line-height:1.6;">Stride, asymmetry, and range of motion in under a minute. No sensors. No lab. Nothing to book.</p>
             </div>
           </div>
           <div data-how-step="2" style="display:flex; gap:22px; opacity:.28; transition:opacity .45s ease;">
@@ -738,7 +805,7 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;heroImageZoom&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:164,&quot;min&quot;:100,&quot;max&quot;:260,&quot;step&quot;:2,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero 2 — A single session&quot;},&quot;heroImageFocusX&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:53,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:1,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero 2 — A single session&quot;},&quot;heroImageFocusY&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:46,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:1,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero 2 — A single session&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;heroImageZoom&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:100,&quot;min&quot;:100,&quot;max&quot;:260,&quot;step&quot;:2,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero 2 — A single session&quot;},&quot;heroImageFocusX&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:50,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:1,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero 2 — A single session&quot;},&quot;heroImageFocusY&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:50,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:1,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero 2 — A single session&quot;}}">
 class Component extends DCLogic {
   state = { modal:null, stage:'drop', email:'', otp:'', sess:5 };
 
@@ -753,7 +820,12 @@ class Component extends DCLogic {
 
   hoverSess = (i) => () => this.setState({ sess:i });
 
-  constructor(props){ super(props); this.navRef = React.createRef(); this.barRef = React.createRef(); this.heroV1 = React.createRef(); this.heroV2 = React.createRef(); this.howRef = React.createRef(); this.heroContentRef = React.createRef(); this.momentHeadRef = React.createRef(); this.captureRef = React.createRef(); this.momentFrameRef = React.createRef(); this.phoneFloatRef = React.createRef(); this.phoneTiltRef = React.createRef(); this.phoneCardRef = React.createRef(); this.uploadV = React.createRef(); }
+  // The hero reel, in play order. One place to add or reorder clips — the handoff ring,
+  // the visibility gate and the no-loop exemption all read from here.
+  heroVids = () => [this.heroV1, this.heroV2, this.heroV3].map(r => r && r.current).filter(Boolean);
+  isHeroVid = (v) => this.heroVids().indexOf(v) !== -1;
+
+  constructor(props){ super(props); this.navRef = React.createRef(); this.barRef = React.createRef(); this.heroV1 = React.createRef(); this.heroV2 = React.createRef(); this.heroV3 = React.createRef(); this.howRef = React.createRef(); this.heroContentRef = React.createRef(); this.momentHeadRef = React.createRef(); this.captureRef = React.createRef(); this.momentFrameRef = React.createRef(); this.phoneFloatRef = React.createRef(); this.phoneTiltRef = React.createRef(); this.phoneCardRef = React.createRef(); this.uploadV = React.createRef(); }
 
   curveRef = React.createRef();
   multicamV = React.createRef();
@@ -921,8 +993,9 @@ class Component extends DCLogic {
       const h = this.momentHeadRef.current; if(h) rise(h, { start:0.98, end:0.55, dist:70 });
       const c = this.momentCardRef.current; if(c) rise(c, { start:0.88, end:0.20, dist:56 });
       const im = this.momentImgRef.current;
-      if(im && im.parentElement){
-        // continuous drift inside the crop — the slack left by the oversized img
+      // The drift moves the image inside the slack an oversized crop leaves. At 100% there
+      // is no slack, so drifting would expose the frame's own background at the edges.
+      if(im && im.parentElement && Number(this.props.heroImageZoom ?? 100) > 100){
         const r = im.parentElement.getBoundingClientRect(), vh = window.innerHeight;
         let q = (vh - r.top) / (vh + r.height);
         q = Math.max(0, Math.min(1, q));
@@ -947,7 +1020,10 @@ class Component extends DCLogic {
       let p = (start - r.top) / (start - end); p = Math.max(0, Math.min(1, p));
       const e = 1 - Math.pow(1 - p, 3);
       let q = (vh - r.top) / (vh + r.height); q = Math.max(0, Math.min(1, q));
-      const tx = ((1 - e) * -52).toFixed(1);
+      // 52px is 13% of a 390px screen: the frame entered from well outside the viewport and
+      // its two overlay badges ("15 strides…", the 41mm pair) were clipped off the left edge
+      // for the whole entry. Scale the travel to the screen.
+      const tx = ((1 - e) * (window.innerWidth < 700 ? -18 : -52)).toFixed(1);
       const ty = ((0.5 - q) * 22).toFixed(1);
       el.style.opacity = e.toFixed(3);
       el.style.transform = 'translate3d(' + tx + 'px,' + ty + 'px,0)';
@@ -963,7 +1039,11 @@ class Component extends DCLogic {
     // is actually on screen. Only what the visitor can see is allowed to decode.
     this.playIfVisible = (v)=>{
       if(!v) return;
-      v.muted = true; v.loop = true; v.playsInline = true;
+      v.muted = true; v.playsInline = true;
+      // The hero pair must NOT loop — they alternate, and the handoff is driven by 'ended'.
+      // This ran on every gate tick and silently re-enabled loop on hero video 1, so 'ended'
+      // never fired and the second clip was never reached.
+      if(!this.isHeroVid(v)) v.loop = true;
       if(v.ended || (v.duration && v.currentTime >= v.duration - 0.05)) v.currentTime = 0;
       const pr = v.play(); if(pr && pr.catch) pr.catch(()=>{});
     };
@@ -976,14 +1056,14 @@ class Component extends DCLogic {
       if(hdr){
         const hr = hdr.getBoundingClientRect();
         const heroOn = hr.bottom > 0 && hr.top < vh;
-        [this.heroV1.current, this.heroV2.current].forEach(v=>{
+        this.heroVids().forEach(v=>{
           if(!v) return;
           if(!heroOn){ if(!v.paused) v.pause(); return; }
           if(parseFloat(v.style.opacity || '1') > 0.5 && v.paused) this.playIfVisible(v);
         });
       }
       document.querySelectorAll('video').forEach(v=>{
-        if(v === this.heroV1.current || v === this.heroV2.current) return;
+        if(this.isHeroVid(v)) return;
         if(v.dataset.thumb !== undefined) return;
         const r = v.getBoundingClientRect();
         const dead = r.width === 0 || r.height === 0
@@ -1011,18 +1091,34 @@ class Component extends DCLogic {
     };
     if(!armMulticam()) [200, 800, 2400].forEach(ms => setTimeout(armMulticam, ms));
 
-    const a = this.heroV1.current, b = this.heroV2.current;
-    if(a && b){
-      [a,b].forEach(v=>{ v.muted = true; v.defaultMuted = true; v.playsInline = true; v.setAttribute('muted',''); });
-      a.loop = false; b.loop = false;
-      { const pr = a.play(); if(pr && pr.catch) pr.catch(()=>{}); }
-      a.addEventListener('ended', ()=>{
-        a.style.opacity = '0'; b.style.opacity = '1';
-        b.currentTime = 0; b.play();
-      });
-      b.addEventListener('ended', ()=>{
-        b.style.opacity = '0'; a.style.opacity = '1';
-        a.currentTime = 0; a.play();
+    // Hero reel: a ring of N clips, each handing off to the next on 'ended'.
+    // Only the first one loads on first paint; every other clip is warmed three seconds
+    // before its turn, or the crossfade lands on an undecoded black frame.
+    const reel = this.heroVids().filter(Boolean);
+    if(reel.length === 1){ reel[0].loop = true; }
+    if(reel.length > 1){
+      reel.forEach(v=>{ v.muted = true; v.defaultMuted = true; v.playsInline = true; v.setAttribute('muted',''); v.loop = false; });
+      { const pr = reel[0].play(); if(pr && pr.catch) pr.catch(()=>{}); }
+      const warm = (v)=>{ if(v.preload !== 'auto'){ v.preload = 'auto'; v.load(); } };
+      reel.forEach((from, i)=>{
+        const to = reel[(i + 1) % reel.length];
+        // data-cut="10" ends a clip early. The file is longer than the part worth showing,
+        // so the reel hands off at that mark instead of waiting for 'ended'.
+        const cut = parseFloat(from.dataset.cut || '') || Infinity;
+        const stop = () => (from.duration ? Math.min(cut, from.duration) : cut);
+        const advance = () => {
+          if(from.dataset.handing === '1') return;
+          from.dataset.handing = '1';
+          from.style.opacity = '0'; to.style.opacity = '1';
+          to.currentTime = 0; const pr = to.play(); if(pr && pr.catch) pr.catch(()=>{});
+          // Let the crossfade finish before parking the outgoing clip at its start.
+          setTimeout(()=>{ from.pause(); from.currentTime = 0; from.dataset.handing = '0'; }, 1500);
+        };
+        from.addEventListener('timeupdate', ()=>{
+          if(stop() - from.currentTime < 3) warm(to);
+          if(from.currentTime >= stop()) advance();
+        });
+        from.addEventListener('ended', advance);
       });
     }
 
@@ -1071,9 +1167,19 @@ class Component extends DCLogic {
   applyMomentCrop = () => {
     const im = this.momentImgRef.current; const p = im && im.parentElement;
     if(!p || !im.naturalWidth) return;
-    const Z = Number(this.props.heroImageZoom ?? 164);
-    const fx = Number(this.props.heroImageFocusX ?? 53) / 100;
-    const fy = Number(this.props.heroImageFocusY ?? 46) / 100;
+    // Defaults are a no-op since 2026-09-02: yard-phone-5.jpg is a full composition at the
+    // frame's own 16:9, so there is nothing to crop. These three were calibrated for
+    // yard-phone-4.png and, left at 164/53/46, silently cut 39% off a photograph the
+    // template says it shows whole — the inline style loses to this routine every time.
+    const Z = Number(this.props.heroImageZoom ?? 100);
+    const fx = Number(this.props.heroImageFocusX ?? 50) / 100;
+    const fy = Number(this.props.heroImageFocusY ?? 50) / 100;
+    if(Z <= 100){
+      // Hand the element back to the template: object-fit:cover needs width AND height,
+      // and any leftover width/left/top from a previous zoom would fight it.
+      im.style.width = ''; im.style.left = ''; im.style.top = ''; im.style.transform = '';
+      return;
+    }
     const r = p.getBoundingClientRect(); if(!r.width || !r.height) return;
     const imgH = (r.width * Z / 100) * (im.naturalHeight / im.naturalWidth);
     im.style.width = Z + '%';
@@ -1135,7 +1241,7 @@ class Component extends DCLogic {
       actLeft: (a.cx/10) + '%', actTop: (a.cy/2.68) + '%',
       actDeltaColor: a.delta.charAt(0) === '-' ? '#F59E0B' : (a.delta === 'baseline' ? '#8D8D8D' : '#22C55E'),
       navRef: this.navRef, barRef: this.barRef, frame3Ref: this.frame3Ref,
-      heroV1: this.heroV1, heroV2: this.heroV2, howRef: this.howRef, multicamV: this.multicamV,
+      heroV1: this.heroV1, heroV2: this.heroV2, heroV3: this.heroV3, howRef: this.howRef, multicamV: this.multicamV,
       heroContentRef: this.heroContentRef, momentHeadRef: this.momentHeadRef, captureRef: this.captureRef, momentFrameRef: this.momentFrameRef, momentImgRef: this.momentImgRef, momentCardRef: this.momentCardRef, phoneFloatRef: this.phoneFloatRef, phoneTiltRef: this.phoneTiltRef, phoneCardRef: this.phoneCardRef, uploadV: this.uploadV,
       openFree: this.openFree, openFreeLink: this.openFreeLink, openPro: this.openPro, openSignIn: this.openSignIn,
       signupOpen: s.modal === 'signup',
